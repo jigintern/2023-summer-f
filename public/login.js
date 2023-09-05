@@ -39,11 +39,11 @@ document
       localStorage.setItem("did", did);
       localStorage.setItem("password", password);
       localStorage.setItem("name", json.user.name);
-
-      document.getElementById("status").innerText = "ログイン成功";
-      document.getElementById("name").innerText = json.user.name;
-      document.getElementById("did").innerText = did;
-      document.getElementById("password").innerText = password;
+      window.location.href = "setting.html";
+      // document.getElementById("status").innerText = "ログイン成功";
+      // document.getElementById("name").innerText = json.user.name;
+      // document.getElementById("did").innerText = did;
+      // document.getElementById("password").innerText = password;
     } catch (err) {
       document.getElementById("error").innerText = err.message;
     }
