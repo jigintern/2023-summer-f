@@ -10,6 +10,13 @@ serve(async (req) => {
   // if (req.method === "GET" && pathname === "/welcome-message") {
   //   return new Response("jigインターンへようこそ！");
   // }
+  
+  // 時間設定API
+  if( req.method === "POST" && pathname === "/time_set" ){
+    const json = await req.json();
+    const time = json.time;
+    return new Response()
+  }
 
   // ユーザー新規登録API
   if (req.method === "POST" && pathname === "/users/register") {
