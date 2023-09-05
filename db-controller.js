@@ -17,7 +17,7 @@ export async function checkIfIdExists(did) {
   // DBにDIDがあるか
   const res = await client.execute(
     `select count(*) from users where did = ?;`,
-    [did]
+    [did],
   );
   // レスポンスのObjectから任意のDIDと保存されているDIDが一致している数を取得し
   // その数が1かどうかを返す
@@ -33,8 +33,8 @@ export async function addDID(did, userName) {
   ]);
 }
 
-  export async function getUser(did) {
-	// DBからsignatureが一致するレコードを取得
-	const res = await client.execute(`select * from users where did = ?;`, [did]);
-	return res;
-  }
+export async function getUser(did) {
+  // DBからsignatureが一致するレコードを取得
+  const res = await client.execute(`select * from users where did = ?;`, [did]);
+  return res;
+}
