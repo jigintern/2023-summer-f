@@ -18,6 +18,12 @@ serve(async (req) => {
     return new Response()
   }
 
+
+//QR読み取りAPI
+  if (req.method === "GET" && pathname === "/qr_auth") {
+    return new Response(JSON.stringify({qr_auth: "true" }), { headers: {"Content-Type": "application/json"}});
+  }
+
   // ユーザー新規登録API
   if (req.method === "POST" && pathname === "/users/register") {
     const json = await req.json();
