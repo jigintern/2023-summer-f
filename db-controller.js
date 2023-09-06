@@ -38,3 +38,55 @@ export async function getUser(did) {
   const res = await client.execute(`select * from users where did = ?;`, [did]);
   return res;
 }
+
+// idの選択
+export async function selectID(did) {
+  let id = await client.query(
+    `SELECT ?? FROM users WHERE ?? = ?;`,
+    ["id", "did", did]
+  );
+  for (const row of id) {
+    id = row.id;
+  }
+  return id;
+}
+
+// 設定したことがあるかの確認
+export async function checkIftimeExists(id) {
+  let res = await client.execute(
+    `select count(*) from time_list where ?? = ?;`,
+    ["user_id", id],
+  );
+  return res.rows[0][res.fields[0].name] === 1;
+}
+
+// DBにtimeを更新
+export async function updatetime(time, id) {
+  await client.execute(`
+  UPDATE time_list 
+  SET ?? = ?
+  WHERE ?? = ?
+  ;
+`, [
+  "wake_up_time", time,
+  "user_id", id
+  ]
+  );
+}
+
+// DBにidとtimeを追加
+export async function addtime(time, id) {
+  await client.execute(`
+  INSERT INTO time_list (
+    ??, ??
+  ) VALUES (
+    ?, ?
+  );
+  `, [
+  "user_id", "wake_up_time",
+  id, time
+  ]
+  );
+}
+
+
