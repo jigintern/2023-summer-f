@@ -12,7 +12,7 @@ serve(async (req) => {
   // }
 
   // 時間設定API
-  if( req.method === "POST" && pathname === "/time_set" ){
+  if (req.method === "POST" && pathname === "/time_set") {
     const json = await req.json();
     const time = json.time;
     const did = json.did;
@@ -43,10 +43,11 @@ serve(async (req) => {
     }
   }
 
-
-//QR読み取りAPI
+  //QR読み取りAPI
   if (req.method === "GET" && pathname === "/qr_auth") {
-    return new Response(JSON.stringify({qr_auth: "true" }), { headers: {"Content-Type": "application/json"}});
+    return new Response(JSON.stringify({ qr_auth: "true" }), {
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   // ユーザー新規登録API

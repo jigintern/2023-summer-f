@@ -9,7 +9,7 @@
     <form method="post">
         <label>
           アラームセット
-          <input type="datetime-local" id="sleeptime" name="sleeptime"  />
+          <input type="datetime-local" id="sleeptime" name="sleeptime" />
         </label>
         <button class="favolit styled" type="submit" id="time_set_button">もう寝る</button>
       </form>
@@ -18,7 +18,6 @@
 
 
   <script type="module">
-
     document.getElementById("time_set_button").onclick = async () => {
       const settime = document.getElementById("sleeptime").value;
       const modifiedTime = settime + ":00";
@@ -29,16 +28,11 @@
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
       });
+      location.href="/sleeper.html"
     }
 
-    
   </script>
+  
 </body>
 
 </html>
-
-
-
-
-
-

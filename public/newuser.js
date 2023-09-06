@@ -33,9 +33,6 @@ document.getElementById("submit").onclick = async (event) => {
         message,
       }),
     });
-  } catch (err) {
-    document.getElementById("error").innerText = err.message;
-  }
   // サーバーから成功ステータスが返ってこないときの処理
   if (!resp.ok) {
     const errMsg = await resp.text();
@@ -46,6 +43,9 @@ document.getElementById("submit").onclick = async (event) => {
   localStorage.setItem("did", did);
   localStorage.setItem("password", password);
   localStorage.setItem("name", name);
+  } catch (err) {
+    document.getElementById("error").innerText = err.message;
+  }
 };
 // DIDとパスワードの保存処理
 document.getElementById("saveBtn").onclick = async (event) => {
