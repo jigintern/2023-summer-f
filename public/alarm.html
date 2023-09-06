@@ -1,26 +1,29 @@
-<button class="favolit styled" type="button">スキャンする</button>
-
-<script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.min.js">
-</script>
-
+<script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.min.js"></script>
 
 <script>
   var sound = new Howl({
     src: ['clock_alarm.mp3']
   });
 
+  //アラーム時間の呼び出し
+
   //アラームまでの時間を計算
   let date1 = new Date('2020-04-01 10:00:00');
-  let date2 = new Date('2020-04-01 10:00:10');
+  let date2 = new Date('2020-04-01 10:00:10')
 
   var diff = date2.getTime() - date1.getTime();
   console.log(diff / (1000));
 
 
   //アラーム機能
-  event = setInterval(sound.play(), 0);
-  setTimeout(event, diff);
 
+   setTimeout(() => {  let sound = new Howl({
+     src: ['clock_alarm.mp3']
+   });
+     sound.play();
+   }, diff);
+  //  event = setInterval(sound.play(), 0);
+  //  setTimeout(event, diff);
 
 </script>
 
@@ -41,5 +44,4 @@
   };
 
 </script>
-
 </html>
