@@ -1,1 +1,70 @@
-<h1>検知中...</h1>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>ボリュームメーター</title>
+
+</head>
+
+<body>
+    <div style="border: 1px solid black; width: 500px;">
+        <div id="volume" style="height: 10px; background: black; transition: width .1s; width: 0%"></div>
+    </div>
+    <button onClick="start()" type="button">スタート</button>
+
+
+
+    <script>
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const meter = document.getElementById('volume');
+        var count = 0;
+
+        function render(percent) {
+            //console.log('Percent:', percent);
+            meter.style.width = Math.min(Math.max(0, percent), 100) + '%';
+        }
+
+        function onProcess(event) {
+            const data = event.inputBuffer.getChannelData(0);
+            const peak = data.reduce((max, sample) => {
+                const cur = Math.abs(sample);
+                return max > cur ? max : cur;
+            });
+            if (100 * peak >= 30) {
+                count++;
+            }
+            console.log(count);
+            render(100 * peak);
+
+            if (count >= 100) {
+                mediaStream.getTracks().forEach(track => track.stop());
+                location.href="/wake_up.html"
+            }
+
+        }
+
+        let mediaStream;
+
+        async function start() {
+            mediaStream = await navigator.mediaDevices
+                .getUserMedia({ audio: true })
+                .catch(console.error);
+
+            const ctx = new AudioContext();
+            console.log('Sampling Rate:', ctx.sampleRate);
+
+            const processor = ctx.createScriptProcessor(1024, 1, 1);
+            processor.onaudioprocess = onProcess;
+            processor.connect(ctx.destination);
+
+            const source = ctx.createMediaStreamSource(mediaStream);
+            source.connect(processor);
+        }
+
+        
+
+    </script>
+</body>
+
+</html>
