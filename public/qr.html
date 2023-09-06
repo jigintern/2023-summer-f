@@ -68,6 +68,8 @@
     const outputContainer = document.getElementById("output");
     const outputMessage = document.getElementById("outputMessage");
     const ok = document.getElementById("ok");
+    let qrtxt;
+
 
 
 
@@ -107,8 +109,12 @@
           drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
           drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
           drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
-          outputMessage.hidden = true;
-          ok.hidden = false;
+          qrtxt=code.data
+          if (qrtxt==="https://2023-summer-f.deno.dev/sleeper.html") {
+            window.location.href = 'https://2023-summer-f.deno.dev/sleeper.html';
+            outputMessage.hidden = true;
+            ok.hidden = false;
+          }
         } else {
           outputMessage.hidden = false;
           ok.hidden = true;
@@ -116,6 +122,9 @@
       }
       requestAnimationFrame(tick);
     }
+
+
+
   </script>
 </body>
 </html>
