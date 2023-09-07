@@ -6,6 +6,10 @@
   });
 
   //アラーム時間の呼び出し
+  document.getElementById("set_time").onclick = async () => {
+      const response = await fetch("/set_time");
+      document.getElementById("set_time").innerText = await response.text();
+    };
 
   //アラームまでの時間を計算
   let date1 = new Date('2020-04-01 10:00:00');

@@ -21,8 +21,9 @@
     document.getElementById("time_set_button").onclick = async () => {
       const settime = document.getElementById("sleeptime").value;
       const modifiedTime = settime + ":00";
-      const payload = { time: modifiedTime }
-      const response = await fetch("/time_set", {
+      const did = localStorage.getItem("did");
+      const payload = {time:modifiedTime, did:did}
+      const response = await fetch("/time_set",{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

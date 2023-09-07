@@ -15,11 +15,11 @@ document.getElementById("submit").onclick = async (event) => {
   // `DIDAuth` モジュールの `createNewUser` を使って DID、パスワード、メッセージ、電子署名を取得
   const [did, password, message, sign] = DIDAuth.createNewUser(name);
 
-  // Formに反映
-  document.getElementById("did").value = did;
-  document.getElementById("password").value = password;
-  document.getElementById("sign").value = sign;
-  document.getElementById("message").value = message;
+  // // Formに反映
+  // document.getElementById("did").value = did;
+  // document.getElementById("password").value = password;
+  // document.getElementById("sign").value = sign;
+  // document.getElementById("message").value = message;
 
   // 公開鍵・名前・電子署名をサーバーに渡す
   try {
@@ -33,9 +33,6 @@ document.getElementById("submit").onclick = async (event) => {
         message,
       }),
     });
-  } catch (err) {
-    document.getElementById("error").innerText = err.message;
-  }
   // サーバーから成功ステータスが返ってこないときの処理
   if (!resp.ok) {
     const errMsg = await resp.text();
@@ -46,12 +43,9 @@ document.getElementById("submit").onclick = async (event) => {
   localStorage.setItem("did", did);
   localStorage.setItem("password", password);
   localStorage.setItem("name", name);
-};
-// DIDとパスワードの保存処理
-document.getElementById("saveBtn").onclick = async (event) => {
-  event.preventDefault();
-
-  const did = document.getElementById("did").value;
-  const password = document.getElementById("password").value;
+  // DIDとパスワードの保存
   DIDAuth.savePem(did, password);
+  } catch (err) {
+    document.getElementById("error").innerText = err.message;
+  }
 };

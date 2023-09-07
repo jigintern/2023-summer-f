@@ -44,7 +44,7 @@ document
       document.getElementById("name").innerText = json.user.name;
       document.getElementById("did").innerText = did;
       document.getElementById("password").innerText = password;
-      window.location.href = 'setting.html';
+      window.location.href = "setting.html";
     } catch (err) {
       document.getElementById("error").innerText = err.message;
     }

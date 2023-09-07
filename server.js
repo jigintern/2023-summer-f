@@ -1,7 +1,7 @@
 import { serve } from "https://deno.land/std@0.151.0/http/server.ts";
 import { serveDir } from "https://deno.land/std@0.151.0/http/file_server.ts";
 import { DIDAuth } from "https://jigintern.github.io/did-login/auth/DIDAuth.js";
-import { addDID, checkIfIdExists, getUser } from "./db-controller.js";
+import { addDID, checkIfIdExists, getUser, addtime, updatetime, checkIftimeExists, selectID } from "./db-controller.js";
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
@@ -10,18 +10,44 @@ serve(async (req) => {
   // if (req.method === "GET" && pathname === "/welcome-message") {
   //   return new Response("jigインターンへようこそ！");
   // }
-  
+
   // 時間設定API
-  if( req.method === "POST" && pathname === "/time_set" ){
+  if (req.method === "POST" && pathname === "/time_set") {
     const json = await req.json();
     const time = json.time;
-    return new Response()
+    const did = json.did;
+
+    //一度設定したことがあるかの確認
+    try {
+      const id = await selectID(did);
+      const isExists = await checkIftimeExists(id);
+      if (isExists) {
+        //設定がある場合DBのtimeを更新
+        try {
+          await updatetime(time, id);
+          return new Response("ok");
+        } catch (e) {
+          return new Response(e.message, { status: 500 });
+        }
+      } else {
+        //設定がない場合DBにtimeとidを追加
+        try {
+          await addtime(time, id);
+          return new Response("ok");
+        } catch (e) {
+          return new Response(e.message, { status: 500 });
+        }
+      }
+    } catch (e) {
+      return new Response(e.message, { status: 500 });
+    }
   }
 
-
-//QR読み取りAPI
+  //QR読み取りAPI
   if (req.method === "GET" && pathname === "/qr_auth") {
-    return new Response(JSON.stringify({qr_auth: "true" }), { headers: {"Content-Type": "application/json"}});
+    return new Response(JSON.stringify({ qr_auth: "true" }), {
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   // ユーザー新規登録API
