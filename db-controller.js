@@ -89,4 +89,16 @@ export async function addtime(time, id) {
   );
 }
 
+// DBから時間を取得
+export async function selectTime(id) {
+  let time = await client.query(
+    `SELECT ?? FROM time_list WHERE ?? = ?;`,
+    ["wake_up_time", "user_id", id]
+  );
+  for (const row of time) {
+    time = row.wake_up_time;
+  }
+  return time;
+}
+
 
