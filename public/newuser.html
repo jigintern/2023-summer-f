@@ -1,102 +1,43 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-    <title>DID Login Sample</title>
-    <link rel="stylesheet" href="style.css"/>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    />
-	<script type="module" src="newuser.js" defer></script>
-  </head>
 
-  <body>
-    <header>
-      <a href="login_page.html"> ログイン </a>
-    </header>
-    <section class="section">
-      <div class="container">
-        <h1 class="title has-text-centered">新規登録</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <title>新規登録-WAAAAAsh!!</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <script type="module" src="newuser.js" defer></script>
+</head>
 
-        <form id="form">
-          <div class="container mb-4">
-            <p id="error" class="has-text-danger"></p>
+<body>
+  <header>
+    <a href="login_page.html"> ログイン </a>
+  </header>
+  <section class="section">
+    <div class="container">
+      <h1 class="title has-text-centered">新規登録</h1>
+      <h5 class="subtitle has-text-centered">DIDとパスワードは自動保存されます</h5>
+      <form id="form">
+        <div class="container mb-4">
+          <p id="error" class="has-text-danger"></p>
+        </div>
+
+        <div class="field">
+          <label class="label">名前</label>
+          <div class="control">
+            <input class="input" type="text" id="name" placeholder="名前を入力してください" />
           </div>
-
-          <div class="field">
-            <label class="label">名前</label>
-            <div class="control">
-              <input
-                class="input"
-                type="text"
-                id="name"
-                placeholder="名前を入力してください"
-              />
-            </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <button class="button is-link is-midiam is-fullwidth" id="submit">登録してログイン</button>
           </div>
-<!--
-          <div class="field">
-            <label class="label">DID</label>
-            <div class="control">
-              <input
-                class="input"
-                type="text"
-                id="did"
-                placeholder="DID"
-                disabled
-              />
-            </div>
-          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</body>
 
-          <div class="field">
-            <label class="label">パスワード</label>
-            <div class="control">
-              <input
-                class="input"
-                type="text"
-                id="password"
-                placeholder="パスワード"
-                disabled
-              />
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">電子署名</label>
-            <div class="control">
-              <textarea
-                class="textarea"
-                id="sign"
-                placeholder="Signature"
-                disabled
-              ></textarea>
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">message</label>
-            <div class="control">
-              <input
-                class="input"
-                type="text"
-                id="message"
-                placeholder="message"
-                disabled
-              />
-            </div>
-          </div> -->
-
-          <div class="field is-grouped">
-            <div class="control">
-              <button class="button is-link" id="submit">登録してDIDとパスワードを保存</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </section>
-
-
-  </body>
 </html>

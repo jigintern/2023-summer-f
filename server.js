@@ -1,7 +1,7 @@
 import { serve } from "https://deno.land/std@0.151.0/http/server.ts";
 import { serveDir } from "https://deno.land/std@0.151.0/http/file_server.ts";
 import { DIDAuth } from "https://jigintern.github.io/did-login/auth/DIDAuth.js";
-import { addDID, checkIfIdExists, getUser, addtime, updatetime, checkIftimeExists, selectID } from "./db-controller.js";
+import { addDID, checkIfIdExists, getUser, addtime, updatetime, checkIftimeExists, selectID, selectTime } from "./db-controller.js";
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
@@ -44,6 +44,18 @@ serve(async (req) => {
     }
   }
 
+  //起床時間獲得API
+  if (req.method === "POST" && pathname === "/time_get") {
+    const json = await req.json();
+    const id = json.id;
+
+    try {
+      const wakeupTime = await selectTime(id);
+      return new Response(JSON.stringify({ wake_up_time: wakeupTime }));
+    } catch (e) {
+      return new Response(e.message, { status: 500 });
+    }
+  }
 
 
   // ユーザー新規登録API
