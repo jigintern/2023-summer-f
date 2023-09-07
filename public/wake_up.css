@@ -1,0 +1,23 @@
+body{
+	min-height: 100vh;
+	background-color: #F2D4A4;
+}
+p{
+	color: #134074 !important;
+	text-align: 	center;
+	font-size: 8vh;
+	margin: 0px;
+}
+div{
+	height: 20vh;
+}
+button{
+	background-color: #FBB13C;
+	border-radius: 10%;
+	margin: 5vh;
+	height: 15vh;
+	width: 15vh;
+}
+a{
+	color: #134074;
+}
