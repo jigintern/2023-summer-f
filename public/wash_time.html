@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>ボリュームメーター</title>
 
 </head>
 
@@ -11,7 +10,7 @@
     <div style="border: 1px solid black; width: 500px;">
         <div id="volume" style="height: 10px; background: black; transition: width .1s; width: 0%"></div>
     </div>
-    <button onClick="start()" type="button">スタート</button>
+    <!-- <button onClick="start()" type="button">スタート</button> -->
 
 
 
@@ -19,6 +18,7 @@
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         const meter = document.getElementById('volume');
         var count = 0;
+
 
         function render(percent) {
             //console.log('Percent:', percent);
@@ -39,12 +39,14 @@
 
             if (count >= 100) {
                 mediaStream.getTracks().forEach(track => track.stop());
-                location.href="/wake_up.html"
+                location.href = "/wake_up.html"
             }
 
         }
 
         let mediaStream;
+
+        
 
         async function start() {
             mediaStream = await navigator.mediaDevices
@@ -62,7 +64,9 @@
             source.connect(processor);
         }
 
-        
+        window.setTimeout(start, 3000);
+
+
 
     </script>
 </body>
