@@ -18,7 +18,28 @@
     -moz-border-radius:50px;
 }
 
-body {
+.formflex{
+    display: flex;
+    flex-direction: column;
+    margin: 0 20%;
+    align-items: center;
+    gap: 15vh;
+    padding-top: 40px;
+  } 
+
+  .functionflex{
+    display: flex;  
+    align-items: stretch;
+    width: 100%;
+  }
+
+.allflex{
+    display:flex;
+    flex-direction: column;
+    gap: 10vh;
+}
+
+body{
 	background-color:#F2D4A4;
 }
 
@@ -27,8 +48,20 @@ body {
     border-top-right-radius: 10px;    
     border-bottom-left-radius: 10px;   
     border-bottom-right-radius: 10px;
+    border:none;
 
 }
+
+input.formsize{
+    width:250px;
+    height:30px;
+    }
+
+/* span{
+    color: #134074;
+} */
+
+
 
 /* トグルスイッチ */
 .toggle_input {
@@ -79,5 +112,5 @@ body {
     position: relative;
     width: 75px;
     height: 35px;
-    margin: auto;
+    margin-left: auto;
   }

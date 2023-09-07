@@ -8,32 +8,47 @@
 </head>
 
 <body>
-    <form method="post">
+    <form class="formflex" method="post">
         <label>
-          <input type="datetime-local" id="sleeptime" name="sleeptime" class="formradius" />
-        </label>
+          <input type="datetime-local" id="sleeptime" name="sleeptime" class="formradius formsize"/>
+    
+    </label>
+<div class="allflex">
+  <div class="functionflex">
+    <p>
+      バイブレーション
+    </p>
+    <div class="toggle_button">
+      <input id="toggle" class="toggle_input" type='checkbox' />
+      <label for="toggle" class="toggle_label"></label>
+    </div>
+  </div>
+  <div class="functionflex">
+    <p>
+      ライト       
+    </p>
+    <div class="toggle_button">
+      <input id="toggle" class="toggle_input" type='checkbox' />
+      <label for="toggle" class="toggle_label"></label>
+    </div>
+  </div>
+  <div class="functionflex">
+    <p>
+      画面の明るさ
+    </p>
+    <div class="toggle_button">
+      <input id="toggle" class="toggle_input" type='checkbox' />
+      <label for="toggle" class="toggle_label"></label>
+    </div>
+  </div>
+</div>
         <!-- <button class='btn' type="button" id="time_set_button">もう寝る</button> -->
         <div class='btn'>
-          <button id="time_set_button" type="button" >ボタン</button>
+          <button id="time_set_button" type="button" class="btncenter">ボタン</button>
         </div>
       </form>
 
-    <div class="toggle_button">
-      <input id="toggle" class="toggle_input" type='checkbox' />
-      <label for="toggle" class="toggle_label"></label>
-    </div>
 
-    <div class="toggle_button">
-      <input id="toggle" class="toggle_input" type='checkbox' />
-      <label for="toggle" class="toggle_label"></label>
-    </div>
-
-    <div class="toggle_button">
-      <input id="toggle" class="toggle_input" type='checkbox' />
-      <label for="toggle" class="toggle_label"></label>
-    </div>
-
-    
   <!-- modifiedTimeを表示する要素 -->
 
 
