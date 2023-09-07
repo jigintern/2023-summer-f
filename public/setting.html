@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 
 <body>
@@ -25,7 +26,7 @@
       const payload = {time:modifiedTime, did:did}
       const response = await fetch("/time_set",{
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       }).then((res) => {
         return res.json(); // サーバーサイドからのデータをJSONとして解析
@@ -38,7 +39,7 @@
     }
 
   </script>
-  
+
 </body>
 
 </html>

@@ -1,25 +1,98 @@
-<button class="favolit styled"
-type="button" id="time_get">スキャンする</button>
+<script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.min.js"></script>
+<link rel="stylesheet" href="alarm.css">
+<script>
 
-  <script type="module">
-    document.getElementById("time_get").onclick = async () => {
-      const id = localStorage.getItem("user_id");
-      const response = await fetch("/time_get",{
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({id:id})
-      }).then((res) => {
-        return res.json(); // サーバーサイドからのデータをJSONとして解析
-      }).then((data) => {
-        let date = new Date(data.wake_up_time);
-        console.log(date);
-      }).catch((e) => {
-        console.error(e)
-      });
-    }
+  //時計の表示
+  const clock = () => {
+    // 現在の日時・時刻の情報を取得
+    const d = new Date();
 
-  </script>
-  
+    // 年を取得
+    let year = d.getFullYear();
+    // 月を取得
+    let month = d.getMonth() + 1;
+    // 日を取得
+    let date = d.getDate();
+    // 曜日を取得
+    let dayNum = d.getDay();
+    const weekday = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+    let day = weekday[dayNum];
+    // 時を取得
+    let hour = d.getHours();
+    // 分を取得
+    let min = d.getMinutes();
+    // 秒を取得
+    //let sec = d.getSeconds();
+
+    // 1桁の場合は0を足して2桁に
+    month = month < 10 ? "0" + month : month;
+    date = date < 10 ? "0" + date : date;
+    hour = hour < 10 ? "0" + hour : hour;
+    min = min < 10 ? "0" + min : min;
+    //sec = sec < 10 ? "0" + sec : sec;
+
+    // 日付・時刻の文字列を作成
+    let today = `${year}.${month}.${date} ${day}`;
+    let time = `${hour}:${min}`;
+
+    // 文字列を出力
+    document.querySelector(".clock-date").innerText = today;
+    document.querySelector(".clock-time").innerText = time;
+  };
+
+  // 1秒ごとにclock関数を呼び出す
+  setInterval(clock, 1000);
+
+
+  //アラームまでの時間を計算
+  let date1 = new Date('2020-04-01 10:00:00');
+  let date2 = new Date('2020-04-01 10:00:10')
+
+  var diff = date2.getTime() - date1.getTime();
+  console.log(diff / (1000));
+
+
+  //アラーム機能
+
+  setTimeout(() => {
+    let sound = new Howl({
+      src: ['clock_alarm.mp3'],
+      loop: true
+    });
+    sound.play();
+  }, diff);
+
+</script>
+
+<body>
+
+
+  <!-- 時計の表示 -->
+  <div class="container">
+    <div class="clock">
+      <p class="clock-date"></p>
+      <p class="clock-time"></p>
+    </div>
+  </div>
+
+
+
+  <div>
+    <!-- <button id="start_button">start</button> -->
+    <button id="stop_button">スキャンする</button>
+
+  </div>
 </body>
+<script>
+
+  //document.getElementById("start_button").onclick = async () => {
+  //  await sound.play();
+  //};
+  document.getElementById("stop_button").onclick = async () => {
+    await sound.stop();
+    // location.href = "/qr.html"
+  };
+
+</script>
 
 </html>
