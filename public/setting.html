@@ -6,13 +6,13 @@
 </head>
 
 <body>
-  <form method="post">
-    <label>
-      アラームセット
-      <input type="datetime-local" id="sleeptime" name="sleeptime" />
-    </label>
-    <button class="favolit styled" type="submit" id="time_set_button">もう寝る</button>
-  </form>
+    <form method="post">
+        <label>
+          アラームセット
+          <input type="datetime-local" id="sleeptime" name="sleeptime" />
+        </label>
+        <button class="favolit styled" type="button" id="time_set_button">もう寝る</button>
+      </form>
 
   <!-- modifiedTimeを表示する要素 -->
 
@@ -27,8 +27,14 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
+      }).then((res) => {
+        return res.json(); // サーバーサイドからのデータをJSONとして解析
+      }).then((data) => {
+        localStorage.setItem('user_id', data.user_id);
+        location.href="/sleeper.html"
+      }).catch((e) => {
+        console.error(e)
       });
-      location.href = "/alarm.html"
     }
 
   </script>

@@ -25,7 +25,7 @@ serve(async (req) => {
         //設定がある場合DBのtimeを更新
         try {
           await updatetime(time, id);
-          return new Response("ok");
+          return new Response(JSON.stringify({ user_id: id }));
         } catch (e) {
           return new Response(e.message, { status: 500 });
         }
@@ -33,7 +33,7 @@ serve(async (req) => {
         //設定がない場合DBにtimeとidを追加
         try {
           await addtime(time, id);
-          return new Response("ok");
+          return new Response(JSON.stringify({ user_id: id }));
         } catch (e) {
           return new Response(e.message, { status: 500 });
         }
