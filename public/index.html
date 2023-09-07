@@ -4,27 +4,17 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
-  <title>ようこそ、jigインターンへ！</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-    }
+  <title>WAAAAAsh!!</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <script type="module" src="auto_login.js" defer></script>
+</head>
 
-    html,
-    body {
-      height: 100vh;
-      width: 100%;
-    }
-
-    body {
-      display: grid;
-      place-content: center;
-    }
-  </style>
-
+<body>
+  <header>
+    <p style="text-align: center;">WAAAAAsh!!</p>
+  </header>
   <section class="section">
-
     <form id="loginForm">
       <div class="container mb-4">
         <p id="error" class="has-text-danger"></p>
@@ -39,26 +29,12 @@
 
       <div class="field">
         <div class="control">
-          <button class="button is-link">ログイン</button>
+          <button class="button is-link is-midiam is-fullwidth">ログイン</button>
         </div>
       </div>
     </form>
     </div>
   </section>
-
-  <script type="module" src="auto_login.js" defer></script>
-  <!-- <script type="module">
-      const message = await fetch("/welcome-message")
-      document.querySelector("body").innerHTML = `<h1>${await message.text()}</h1>`
-    </script> -->
-  <!-- <div style="background-color: skyblue; display: flex; padding: 16px">
-              <a style="color: white; margin-right: 16px" href="login_page.html"> ログイン </a>
-              <a style="color: white; margin-right: 16px" href="newuser.html"> 新規登録 </a>
-            </div> -->
-</head>
-
-<body>
-
 </body>
 
 </html>

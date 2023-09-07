@@ -1,53 +1,48 @@
-
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-    <title>DID Login Sample</title>
-    <link rel="stylesheet" href="style.css"/>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    />
-	<script type="module" src="login.js" defer></script>
-  </head>
 
-  <body>
-	<header>
-		<a href="newuser.html"> 新規登録 </a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <title>ログイン-WAAAAAsh!!</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <script type="module" src="login.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <a href="newuser.html"> 新規登録 </a>
   </header>
-    <section class="section">
-      <div class="container">
-        <h1 class="title has-text-centered">ログイン</h1>
+  <section class="section">
+    <div class="container">
+      <h1 class="title has-text-centered">ログイン</h1>
+      <form id="loginForm">
+        <div class="container mb-4">
+          <p id="error" class="has-text-danger"></p>
+        </div>
 
-        <form id="loginForm">
-          <div class="container mb-4">
-            <p id="error" class="has-text-danger"></p>
+        <div class="container mb-4">
+          <h3 id="status" class="has-text-info"></h3>
+          <p id="name" class="has-text-black"></p>
+          <p id="did" class="has-text-black"></p>
+          <p id="password" class="has-text-black"></p>
+        </div>
+
+        <div class="field">
+          <label class="label">PEMファイル</label>
+          <div class="control">
+            <input class="input" type="file" id="pemFile" accept=".pem" />
           </div>
+        </div>
 
-          <div class="container mb-4">
-            <h3 id="status" class="has-text-info"></h3>
-            <p id="name" class="has-text-black"></p>
-            <p id="did" class="has-text-black"></p>
-            <p id="password" class="has-text-black"></p>
-          </div>
+        <div class="field">
+          <div class="control">
+            <button class="button is-link is-midiam is-fullwidth">ログイン</button>
+      </form>
+    </div>
+  </section>
+</body>
 
-          <div class="field">
-            <label class="label">PEMファイル</label>
-            <div class="control">
-              <input class="input" type="file" id="pemFile" accept=".pem" />
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="control">
-              <button class="button is-link">ログイン</button>
-
-        </form>
-      </div>
-    </section>
-
-
-  </body>
 </html>

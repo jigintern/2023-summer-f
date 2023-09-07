@@ -1,7 +1,7 @@
 import { serve } from "https://deno.land/std@0.151.0/http/server.ts";
 import { serveDir } from "https://deno.land/std@0.151.0/http/file_server.ts";
 import { DIDAuth } from "https://jigintern.github.io/did-login/auth/DIDAuth.js";
-import { addDID, checkIfIdExists, getUser, addtime, updatetime, checkIftimeExists, selectID } from "./db-controller.js";
+import { addDID, checkIfIdExists, getUser, addtime, updatetime, checkIftimeExists, selectID, selectTime } from "./db-controller.js";
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
@@ -16,6 +16,7 @@ serve(async (req) => {
     const json = await req.json();
     const time = json.time;
     const did = json.did;
+
 
     //一度設定したことがあるかの確認
     try {
@@ -43,12 +44,19 @@ serve(async (req) => {
     }
   }
 
-  //QR読み取りAPI
-  if (req.method === "GET" && pathname === "/qr_auth") {
-    return new Response(JSON.stringify({ qr_auth: "true" }), {
-      headers: { "Content-Type": "application/json" },
-    });
+  //起床時間獲得API
+  if (req.method === "POST" && pathname === "/time_get") {
+    const json = await req.json();
+    const id = json.id;
+
+    try {
+      const wakeupTime = await selectTime(id);
+      return new Response(JSON.stringify({ wake_up_time: wakeupTime }));
+    } catch (e) {
+      return new Response(e.message, { status: 500 });
+    }
   }
+
 
   // ユーザー新規登録API
   if (req.method === "POST" && pathname === "/users/register") {
