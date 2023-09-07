@@ -1,2 +1,25 @@
 <button class="favolit styled"
-type="button">スキャンする</button>
+type="button" id="time_get">スキャンする</button>
+
+  <script type="module">
+    document.getElementById("time_get").onclick = async () => {
+      const id = localStorage.getItem("user_id");
+      const response = await fetch("/time_get",{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({id:id})
+      }).then((res) => {
+        return res.json(); // サーバーサイドからのデータをJSONとして解析
+      }).then((data) => {
+        let date = new Date(data.wake_up_time);
+        console.log(date);
+      }).catch((e) => {
+        console.error(e)
+      });
+    }
+
+  </script>
+  
+</body>
+
+</html>
