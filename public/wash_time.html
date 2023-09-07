@@ -61,7 +61,7 @@
     <!--<div style="border: 1px solid black; width: 500px;">-->
     <div class="container">
         <!--<div id="volume" style="height: 10px; background: black; transition: width .1s; width: 0%"></div>-->
-        <div id="washJudge"></div>
+        <div hidden id="washJudge">洗顔中…</div>
         <div id="circle_meter"></div>
         <div id="circle_max"></div>
         <div id="per">0%</div>
@@ -85,7 +85,7 @@
         function circleExp(magn) {
             circleMeter.style.transform ='scale(' + magn + ')';
             let washText = document.getElementById('washJudge');
-            washText.innerText = '洗顔中…';
+            washText.hidden = false;
             let meterText = document.getElementById('per');
             meterText.innerText = magn + '%';
         }
@@ -108,7 +108,7 @@
                 }
             } else {
                 let washText = document.getElementById('washJudge');
-                washText.innerText = '';
+                washText.hidden = true;
             }
             console.log(count);
             //render(100 * peak);
