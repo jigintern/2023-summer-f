@@ -1,0 +1,19 @@
+.btn{
+    width:150px;
+    height:60px;
+    line-height:60px;
+}
+.btn a{
+    display:block;
+    width:100%;
+    height:100%;
+    text-decoration: none;
+    background:#FBB13C;
+    text-align:center;
+    border:4px solid #FBB13C;
+    color:#134074;
+    font-size:25px;
+    border-radius:50px;
+    -webkit-border-radius:50px;
+    -moz-border-radius:50px;
+}
