@@ -28,6 +28,9 @@
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
       }).then((res) => {
+        return res.json(); // サーバーサイドからのデータをJSONとして解析
+      }).then((data) => {
+        localStorage.setItem('user_id', data.user_id);
         location.href="/sleeper.html"
       }).catch((e) => {
         console.error(e)
