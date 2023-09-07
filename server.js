@@ -49,7 +49,6 @@ serve(async (req) => {
     const json = await req.json();
     const id = json.id;
 
-    //一度設定したことがあるかの確認
     try {
       const wakeupTime = await selectTime(id);
       return new Response(JSON.stringify({ wake_up_time: wakeupTime }));
