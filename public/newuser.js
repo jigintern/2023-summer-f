@@ -45,6 +45,8 @@ document.getElementById("submit").onclick = async (event) => {
     localStorage.setItem("name", name);
     // DIDとパスワードの保存
     DIDAuth.savePem(did, password);
+    //自動ログイン(っぽい機能)
+    window.location.href = "setting.html";
   } catch (err) {
     document.getElementById("error").innerText = err.message;
   }
