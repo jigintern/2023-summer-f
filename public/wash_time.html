@@ -4,11 +4,67 @@
 <head>
     <meta charset="utf-8" />
 
+    <style>
+    .container {
+        width: 100%;
+        height: 100vh;
+        background-color: #F2D4A4;
+        position: relative;
+    }
+
+    #washJudge {
+        font-size: 100px;
+        color: #134074;
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #circle_meter {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+
+        transform: scale(0);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #circle_max {
+        width: 500px;
+        height: 500px;
+        border: solid 5px #134074;
+        border-radius: 50%;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #per {
+        font-size: 50px;
+        color: #134074;
+        position: absolute;
+        top: 65%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    </style>
+
 </head>
 
 <body>
-    <div style="border: 1px solid black; width: 500px;">
-        <div id="volume" style="height: 10px; background: black; transition: width .1s; width: 0%"></div>
+    <!--<div style="border: 1px solid black; width: 500px;">-->
+    <div class="container">
+        <!--<div id="volume" style="height: 10px; background: black; transition: width .1s; width: 0%"></div>-->
+        <div id="washJudge"></div>
+        <div id="circle_meter"></div>
+        <div id="circle_max"></div>
+        <div id="per">0%</div>
     </div>
     <!-- <button onClick="start()" type="button">スタート</button> -->
 
@@ -16,13 +72,22 @@
 
     <script>
         const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const meter = document.getElementById('volume');
+        const circleMeter = document.getElementById('circle_meter');
         var count = 0;
 
 
-        function render(percent) {
+        //function render(percent) {
             //console.log('Percent:', percent);
-            meter.style.width = Math.min(Math.max(0, percent), 100) + '%';
+            //meter.style.width = Math.min(Math.max(0, percent), 100) + '%';
+        //}
+
+        //円拡大
+        function circleExp(magn) {
+            circleMeter.style.transform ='scale(' + magn + ')';
+            let washText = document.getElementById('washJudge');
+            washText.innerText = '洗顔中…';
+            let meterText = document.getElementById('per');
+            meterText.innerText = magn + '%';
         }
 
         function onProcess(event) {
@@ -33,9 +98,20 @@
             });
             if (100 * peak >= 30) {
                 count++;
+                circleExp(count);
+                if (count <= 20) {
+                    circleMeter.style.background ='red';
+                } else if (count <= 60) {
+                    circleMeter.style.background ='yellow';
+                } else {
+                    circleMeter.style.background ='green';
+                }
+            } else {
+                let washText = document.getElementById('washJudge');
+                washText.innerText = '';
             }
             console.log(count);
-            render(100 * peak);
+            //render(100 * peak);
 
             if (count >= 100) {
                 mediaStream.getTracks().forEach(track => track.stop());
