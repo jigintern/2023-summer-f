@@ -1,18 +1,24 @@
 // pemファイルを受け取って、DIDとパスワードを取得
 import { DIDAuth } from "https://jigintern.github.io/did-login/auth/DIDAuth.js";
 
+function isGuest() {
+  const did = localStorage.getItem("did");
+  const password = localStorage.getItem("password");
+
+  return did === null || password === null;
+}
+
 document
   .getElementById("loginForm")
   .addEventListener("submit", async (event) => {
     event.preventDefault();
-    const pemFile = document.getElementById("pemFile").files[0];
-    if (!pemFile) {
-      document.getElementById("error").innerText =
-        "ファイルを選択してください。";
+	const did = localStorage.getItem("did");
+	const password = localStorage.getItem("password");
+    // 未ログインならログイン画面に遷移する
+    if (isGuest()) {
+      location.href = "login_page.html";
+      return;
     }
-
-    const [did, password] = await DIDAuth.getDIDAndPasswordFromPem(pemFile);
-
     // サーバーにユーザー情報を問い合わせる
     const path = "/users/login";
     const method = "POST";
@@ -46,6 +52,7 @@ document
       document.getElementById("password").innerText = password;
       window.location.href = "setting.html";
     } catch (err) {
-      document.getElementById("error").innerText = err.message;
+      //   document.getElementById("error").innerText = err.message;
+      window.location.href = "login_page.html";
     }
   });

@@ -9,35 +9,33 @@
     <form method="post">
         <label>
           アラームセット
-          <input type="datetime-local" id="sleeptime" name="sleeptime"  />
+          <input type="datetime-local" id="sleeptime" name="sleeptime" />
         </label>
-        <button class="favolit styled" type="submit" id="time_set_button">もう寝る</button>
+        <button class="favolit styled" type="button" id="time_set_button">もう寝る</button>
       </form>
 
   <!-- modifiedTimeを表示する要素 -->
 
 
   <script type="module">
-
     document.getElementById("time_set_button").onclick = async () => {
       const settime = document.getElementById("sleeptime").value;
       const modifiedTime = settime + ":00";
-      const payload = {time:modifiedTime}
+      const did = localStorage.getItem("did");
+      const payload = {time:modifiedTime, did:did}
       const response = await fetch("/time_set",{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
+      }).then((res) => {
+        location.href="/sleeper.html"
+      }).catch((e) => {
+        console.error(e)
       });
     }
 
-    
   </script>
+  
 </body>
 
 </html>
-
-
-
-
-
-
