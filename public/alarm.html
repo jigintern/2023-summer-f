@@ -6,11 +6,23 @@
   <meta charset="utf-8">
   <title>アラーム-WAAAAAsh!!</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.min.js"></script>
-<link rel="stylesheet" href="alarm.css">
-</head>
-<script>
+  <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.min.js"></script>
+  <link rel="stylesheet" href="alarm.css">
 
+  <meta charset="utf-8">
+  <title>jsQR Demo</title>
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+  <!-- <script src="./jsQR.js"></script> -->
+  <link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
+
+
+
+
+
+</head>
+
+
+<script>
   //時計の表示
   const clock = () => {
     // 現在の日時・時刻の情報を取得
@@ -53,72 +65,197 @@
   setInterval(clock, 1000);
 
 
-  //アラームまでの時間を計算
-  let date1 = new Date('2020-04-01 10:00:00');
-  let date2 = new Date('2020-04-01 10:00:10')
 
-  var diff = date2.getTime() - date1.getTime();
-  console.log(diff / (1000));
-
-
-  //アラーム機能
-
-  setTimeout(() => {
-    let sound = new Howl({
-      src: ['clock_alarm.mp3'],
-      loop: true
-    });
-    sound.play();
-  }, diff);
 
 </script>
 
 <body>
 
+  <button id="sleep_button">もう寝る</button>
 
   <!-- 時計の表示 -->
-  <div class="container">
-    <div class="clock">
-      <p class="clock-date"></p>
-      <p class="clock-time"></p>
+  <div id="container" class="container" hidden>
+    <div id="clock" class="clock" hidden>
+      <p id="clock-date" class="clock-date" hidden></p>
+      <p id="clock-time" class="clock-time" hidden></p>
+      <button id="stop_button" hidden>QRをスキャン</button>
     </div>
   </div>
 
-
-
-  <div class="container">
-    <!-- <button id="start_button">start</button> -->
-    <button id="stop_button">QRをスキャン</button>
-    <!-- <button id="time_get">時間取得（てすと）</button> -->
-
-  </div>
 </body>
+
+
+
+
 <script>
 
-  //document.getElementById("start_button").onclick = async () => {
-  //  await sound.play();
-  //};
-  document.getElementById("stop_button").onclick = async () => {
-    await sound.stop();
-    // location.href = "/qr.html"
-  };
+  document.getElementById("sleep_button").onclick = async () => {
+    const sleep_button = document.getElementById("sleep_button")
+    sleep_button.hidden = true;
+    const id = localStorage.getItem("user_id");
+    const response = await fetch("/time_get", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: id })
+    }).then((res) => {
+      return res.json(); // サーバーサイドからのデータをJSONとして解析
+    }).then((data) => {
+      //アラームまでの時間を計算
+      let date1 = new Date();
+      let date2 = new Date(data.wake_up_time)
+      var diff = date2.getTime() - date1.getTime();
+      console.log(diff / (1000));
 
-  // document.getElementById("time_get").onclick = async () => {
-  //     const id = localStorage.getItem("user_id");
-  //     const response = await fetch("/time_get",{
-  //       method: 'POST',
-  //       headers: {'Content-Type': 'application/json'},
-  //       body: JSON.stringify({id:id})
-  //     }).then((res) => {
-  //       return res.json(); // サーバーサイドからのデータをJSONとして解析
-  //     }).then((data) => {
-  //       let date = new Date(data.wake_up_time);
-  //       console.log(date);
-  //     }).catch((e) => {
-  //       console.error(e)
-  //     });
-  //   }
+
+      //アラーム機能
+      setTimeout(() => {
+        document.body.style.backgroundColor = "#F2D4A4";
+        // document.bgColor = "#F2D4A4";
+        const container = document.getElementById("container")
+        const clock1 = document.getElementById("clock")
+        const clock_date = document.getElementById("clock-date")
+        const clock_time = document.getElementById("clock-time")
+        const stop_button = document.getElementById("stop_button")
+        container.hidden = false;
+        clock1.hidden = false;
+        clock_date.hidden = false;
+        clock_time.hidden = false;
+        stop_button.hidden = false;
+
+        let sound = new Howl({
+          src: ['clock_alarm.mp3'],
+          loop: true
+
+        });
+        sound.play();
+      }, diff);
+    }).catch((e) => {
+      console.error(e)
+    });
+  }
+
 
 </script>
+
+<style>
+  body {
+    font-family: 'Ropa Sans', sans-serif;
+    color: #333;
+    max-width: 640px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+
+  #loadingMessage {
+    text-align: center;
+    padding: 40px;
+    background-color: #eee;
+  }
+
+  #canvas {
+    width: 100%;
+  }
+
+  #output {
+    margin-top: 20px;
+    background: #eee;
+    padding: 10px;
+    padding-bottom: 0;
+  }
+
+  #output div {
+    padding-bottom: 10px;
+    word-wrap: break-word;
+  }
+</style>
+</head>
+
+<body>
+  <!--<div id="loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam enabled)</div> -->
+  <canvas id="canvas" hidden></canvas>
+  <!-- <div id="output" hidden>
+    <div id="outputMessage" hidden>検出中......</div>
+    <div hidden id="ok">読み取り成功</div>
+  </div> -->
+
+
+  <script>
+    const video = document.createElement("video");
+    const canvasElement = document.getElementById("canvas");
+    const canvas = canvasElement.getContext("2d");
+    const loadingMessage = document.getElementById("loadingMessage");
+    const outputContainer = document.getElementById("output");
+    const outputMessage = document.getElementById("outputMessage");
+    // const ok = document.getElementById("ok");
+    let qrtxt;
+
+    document.getElementById("stop_button").onclick = () => {
+      canvasElement.hidden = false;
+    const container = document.getElementById("container")
+    const clock1 = document.getElementById("clock")
+    const clock_date = document.getElementById("clock-date")
+    const clock_time = document.getElementById("clock-time")
+    const stop_button = document.getElementById("stop_button")
+    container.hidden = true;
+    clock1.hidden = true;
+    clock_date.hidden = true;
+    clock_time.hidden = true;
+    stop_button.hidden = true;
+  }
+
+    function drawLine(begin, end, color) {
+      canvas.beginPath();
+      canvas.moveTo(begin.x, begin.y);
+      canvas.lineTo(end.x, end.y);
+      canvas.lineWidth = 4;
+      canvas.strokeStyle = color;
+      canvas.stroke();
+    }
+
+    // Use facingMode: environment to attemt to get the front camera on phones
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function (stream) {
+      video.srcObject = stream;
+      video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
+      video.play();
+      requestAnimationFrame(tick);
+    });
+
+    function tick() {
+      // loadingMessage.innerText = "⌛ Loading video..."
+      if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        // loadingMessage.hidden = true;
+
+        // outputContainer.hidden = false;
+
+        canvasElement.height = video.videoHeight;
+        canvasElement.width = video.videoWidth;
+        canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+        const imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height, {
+          inversionAttempts: "dontInvert",
+        });
+        if (code) {
+          drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
+          drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
+          drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
+          drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
+          qrtxt = code.data
+          if (qrtxt === "https://2023-summer-f.deno.dev/sleeper.html") {
+            window.location.href = '/wash_time.html';
+            // outputMessage.hidden = true;
+            // ok.hidden = false;
+          }
+        } else {
+          // outputMessage.hidden = false;
+          // ok.hidden = true;
+        }
+      }
+      requestAnimationFrame(tick);
+    }
+
+
+
+  </script>
 
 </html>
