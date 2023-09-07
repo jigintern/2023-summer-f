@@ -33,18 +33,20 @@ document.getElementById("submit").onclick = async (event) => {
         message,
       }),
     });
-  // サーバーから成功ステータスが返ってこないときの処理
-  if (!resp.ok) {
-    const errMsg = await resp.text();
-    document.getElementById("error").innerText = "エラー：" + errMsg;
-    return;
-  }
-  // レスポンスが正常ならローカルストレージに保存
-  localStorage.setItem("did", did);
-  localStorage.setItem("password", password);
-  localStorage.setItem("name", name);
-  // DIDとパスワードの保存
-  DIDAuth.savePem(did, password);
+    // サーバーから成功ステータスが返ってこないときの処理
+    if (!resp.ok) {
+      const errMsg = await resp.text();
+      document.getElementById("error").innerText = "エラー：" + errMsg;
+      return;
+    }
+    // レスポンスが正常ならローカルストレージに保存
+    localStorage.setItem("did", did);
+    localStorage.setItem("password", password);
+    localStorage.setItem("name", name);
+    // DIDとパスワードの保存
+    DIDAuth.savePem(did, password);
+    //自動ログイン(っぽい機能)
+    window.location.href = "setting.html";
   } catch (err) {
     document.getElementById("error").innerText = err.message;
   }
