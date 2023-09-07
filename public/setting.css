@@ -23,8 +23,8 @@
     flex-direction: column;
     margin: 0 20%;
     align-items: center;
-    gap: 15vh;
-    padding-top: 40px;
+    gap: 13vh;
+    padding-top: 55px;
   } 
 
   .functionflex{
@@ -53,8 +53,8 @@ body{
 }
 
 input.formsize{
-    width:250px;
-    height:30px;
+    width:270px;
+    height:40px;
     }
 
 /* span{
