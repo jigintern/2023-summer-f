@@ -3,6 +3,20 @@ body{
 	background-color: #F2D4A4;
 }
 
+header{
+	background-color: #FBB13C;
+	display: flex;
+	padding: 16px;
+}
+
+a{
+	color: #134074 !important;
+}
+
+p{
+	color: #134074 !important;
+}
+
 h1{
 	color: #134074 !important;
 }
