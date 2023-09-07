@@ -1,15 +1,13 @@
 <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.min.js"></script>
 
 <script>
-  var sound = new Howl({
-    src: ['clock_alarm.mp3']
-  });
+
 
   //アラーム時間の呼び出し
-  document.getElementById("set_time").onclick = async () => {
-      const response = await fetch("/set_time");
-      document.getElementById("set_time").innerText = await response.text();
-    };
+  // document.getElementById("set_time").onclick = async () => {
+  //     const response = await fetch("/set_time");
+  //     document.getElementById("set_time").innerText = await response.text();
+  //   };
 
   //アラームまでの時間を計算
   let date1 = new Date('2020-04-01 10:00:00');
@@ -22,12 +20,11 @@
   //アラーム機能
 
    setTimeout(() => {  let sound = new Howl({
-     src: ['clock_alarm.mp3']
+     src: ['clock_alarm.mp3'],
+     loop: true
    });
      sound.play();
    }, diff);
-  //  event = setInterval(sound.play(), 0);
-  //  setTimeout(event, diff);
 
 </script>
 
