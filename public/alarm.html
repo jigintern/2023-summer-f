@@ -1,5 +1,14 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>アラーム-WAAAAAsh!!</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.min.js"></script>
 <link rel="stylesheet" href="alarm.css">
+</head>
 <script>
 
   //時計の表示
@@ -77,10 +86,10 @@
 
 
 
-  <div>
+  <div class="container">
     <!-- <button id="start_button">start</button> -->
-    <button id="stop_button">スキャンする</button>
-    <button id="time_get">時間取得（てすと）</button>
+    <button id="stop_button">QRをスキャン</button>
+    <!-- <button id="time_get">時間取得（てすと）</button> -->
 
   </div>
 </body>
@@ -94,21 +103,21 @@
     // location.href = "/qr.html"
   };
 
-  document.getElementById("time_get").onclick = async () => {
-      const id = localStorage.getItem("user_id");
-      const response = await fetch("/time_get",{
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({id:id})
-      }).then((res) => {
-        return res.json(); // サーバーサイドからのデータをJSONとして解析
-      }).then((data) => {
-        let date = new Date(data.wake_up_time);
-        console.log(date);
-      }).catch((e) => {
-        console.error(e)
-      });
-    }
+  // document.getElementById("time_get").onclick = async () => {
+  //     const id = localStorage.getItem("user_id");
+  //     const response = await fetch("/time_get",{
+  //       method: 'POST',
+  //       headers: {'Content-Type': 'application/json'},
+  //       body: JSON.stringify({id:id})
+  //     }).then((res) => {
+  //       return res.json(); // サーバーサイドからのデータをJSONとして解析
+  //     }).then((data) => {
+  //       let date = new Date(data.wake_up_time);
+  //       console.log(date);
+  //     }).catch((e) => {
+  //       console.error(e)
+  //     });
+  //   }
 
 </script>
 

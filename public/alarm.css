@@ -1,10 +1,12 @@
  @import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
-
+body{
+  background-color: #F2D4A4;
+  min-height: 100vh;
+}
 /* 全体を囲うコンテナー */
 .container {
   width: 100%;
-  height: 100vh;
-  background-color: #F2D4A4;
+  height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,4 +39,14 @@
   .clock-time {
     font-size: 20vw;
   }
+}
+
+/*ボタンのスタイル*/
+button{
+  border-radius: 50% !important;
+  background-color: #FBB13C !important;
+  color: #134074 !important;
+  /* margin: right !important; */
+  width: 200px !important;
+  height: 200px !important;
 }
