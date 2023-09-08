@@ -100,7 +100,7 @@
       //アラームまでの時間を計算
       let date1 = new Date();
       let date2 = new Date(data.wake_up_time);
-      var diff = date2.getTime() - date1.getTime() - 32400;
+      var diff = date2.getTime() - date1.getTime() - (32400 * 1000);
       console.log(diff / (1000));
 
 
