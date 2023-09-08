@@ -1,0 +1,116 @@
+.btn{
+    width:150px;
+    height:60px;
+    line-height:60px;
+}
+.btn button{
+    display:block;
+    width:100%;
+    height:100%;
+    text-decoration: none;
+    background:#FBB13C;
+    text-align:center;
+    border:4px solid #FBB13C;
+    color:#134074;
+    font-size:25px;
+    border-radius:50px;
+    -webkit-border-radius:50px;
+    -moz-border-radius:50px;
+}
+
+.formflex{
+    display: flex;
+    flex-direction: column;
+    margin: 0 20%;
+    align-items: center;
+    gap: 13vh;
+    padding-top: 55px;
+  } 
+
+  .functionflex{
+    display: flex;  
+    align-items: stretch;
+    width: 100%;
+  }
+
+.allflex{
+    display:flex;
+    flex-direction: column;
+    gap: 10vh;
+}
+
+body{
+	background-color:#F2D4A4;
+}
+
+.formradius{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;    
+    border-bottom-left-radius: 10px;   
+    border-bottom-right-radius: 10px;
+    border:none;
+
+}
+
+input.formsize{
+    width:270px;
+    height:40px;
+    }
+
+/* span{
+    color: #134074;
+} */
+
+
+
+/* トグルスイッチ */
+.toggle_input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .toggle_label {
+    width: 75px;
+    height: 35px;
+    background: #ccc;
+    position: relative;
+    display: inline-block;
+    border-radius: 40px;
+    transition: 0.4s;
+    box-sizing: border-box;
+  }
+  
+  .toggle_label:after {
+    content: "";
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: 0.4s;
+  }
+  
+  .toggle_input:checked + .toggle_label {
+    background-color: #4BD865;
+  }
+  
+  .toggle_input:checked + .toggle_label:after {
+    left: 40px;
+  }
+  
+  .toggle_button {
+    position: relative;
+    width: 75px;
+    height: 35px;
+    margin-left: auto;
+  }
