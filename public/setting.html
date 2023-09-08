@@ -55,6 +55,11 @@
   <script type="module">
     document.getElementById("time_set_button").onclick = async () => {
       const settime = document.getElementById("sleeptime").value;
+      const now = new Date();
+      const settime2 = new Date(settime);
+      if (settime2 <= now){
+        document.getElementById("settime_error").innerText = "過去の日付は登録できません！！";
+      }
       const modifiedTime = settime + ":00";
       const did = localStorage.getItem("did");
       const payload = {time:modifiedTime, did:did}
