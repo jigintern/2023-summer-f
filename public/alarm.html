@@ -47,7 +47,7 @@
     date = date < 10 ? "0" + date : date;
     hour = hour < 10 ? "0" + hour : hour;
     min = min < 10 ? "0" + min : min;
-    //sec = sec < 10 ? "0" + sec : sec;
+
 
     // 日付・時刻の文字列を作成
     let today = `${year}.${month}.${date} ${day}`;
@@ -169,13 +169,7 @@
 </head>
 
 <body>
-  <!--<div id="loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam enabled)</div> -->
   <canvas id="canvas" hidden></canvas>
-  <!-- <div id="output" hidden>
-    <div id="outputMessage" hidden>検出中......</div>
-    <div hidden id="ok">読み取り成功</div>
-  </div> -->
-
 
   <script>
     const video = document.createElement("video");
@@ -184,7 +178,6 @@
     const loadingMessage = document.getElementById("loadingMessage");
     const outputContainer = document.getElementById("output");
     const outputMessage = document.getElementById("outputMessage");
-    // const ok = document.getElementById("ok");
     let qrtxt;
 
     document.getElementById("stop_button").onclick = () => {
@@ -210,21 +203,16 @@
       canvas.stroke();
     }
 
-    // Use facingMode: environment to attemt to get the front camera on phones
+    
     navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function (stream) {
       video.srcObject = stream;
-      video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
+      video.setAttribute("playsinline", true); 
       video.play();
       requestAnimationFrame(tick);
     });
 
     function tick() {
-      // loadingMessage.innerText = "⌛ Loading video..."
       if (video.readyState === video.HAVE_ENOUGH_DATA) {
-        // loadingMessage.hidden = true;
-
-        // outputContainer.hidden = false;
-
         canvasElement.height = video.videoHeight;
         canvasElement.width = video.videoWidth;
         canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
@@ -232,6 +220,7 @@
         const code = jsQR(imageData.data, imageData.width, imageData.height, {
           inversionAttempts: "dontInvert",
         });
+
         if (code) {
           drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
           drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
@@ -240,12 +229,8 @@
           qrtxt = code.data
           if (qrtxt === "https://2023-summer-f.deno.dev/sleeper.html") {
             window.location.href = '/wash_time.html';
-            // outputMessage.hidden = true;
-            // ok.hidden = false;
           }
         } else {
-          // outputMessage.hidden = false;
-          // ok.hidden = true;
         }
       }
       requestAnimationFrame(tick);
