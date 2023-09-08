@@ -27,6 +27,10 @@
     padding-top: 55px;
   } 
 
+.helpflex{
+  display: flex;
+}
+
   .functionflex{
     display: flex;  
     align-items: stretch;
@@ -36,7 +40,7 @@
 .allflex{
     display:flex;
     flex-direction: column;
-    gap: 10vh;
+    gap: 4vh;
 }
 
 body{
