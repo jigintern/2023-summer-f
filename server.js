@@ -7,9 +7,6 @@ serve(async (req) => {
   const pathname = new URL(req.url).pathname;
   console.log(pathname);
 
-  // if (req.method === "GET" && pathname === "/welcome-message") {
-  //   return new Response("jigインターンへようこそ！");
-  // }
 
   // 時間設定API
   if (req.method === "POST" && pathname === "/time_set") {
