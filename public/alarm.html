@@ -67,8 +67,13 @@
 </script>
 
 <body>
+  <div class="flex">
+    <!-- <div class="content" > -->
+      <button id="sleep_button">もう寝る</button>
+    <!-- </div> -->
+  </div>
+  
 
-  <button id="sleep_button">もう寝る</button>
 
   <!-- 時計の表示 -->
   <div id="container" class="container" hidden>
@@ -189,17 +194,17 @@
 
     document.getElementById("stop_button").onclick = () => {
       canvasElement.hidden = false;
-    const container = document.getElementById("container")
-    const clock1 = document.getElementById("clock")
-    const clock_date = document.getElementById("clock-date")
-    const clock_time = document.getElementById("clock-time")
-    const stop_button = document.getElementById("stop_button")
-    container.hidden = true;
-    clock1.hidden = true;
-    clock_date.hidden = true;
-    clock_time.hidden = true;
-    stop_button.hidden = true;
-  }
+      const container = document.getElementById("container")
+      const clock1 = document.getElementById("clock")
+      const clock_date = document.getElementById("clock-date")
+      const clock_time = document.getElementById("clock-time")
+      const stop_button = document.getElementById("stop_button")
+      container.hidden = true;
+      clock1.hidden = true;
+      clock_date.hidden = true;
+      clock_time.hidden = true;
+      stop_button.hidden = true;
+    }
 
     function drawLine(begin, end, color) {
       canvas.beginPath();
