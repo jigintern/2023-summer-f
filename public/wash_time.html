@@ -56,7 +56,7 @@
 
 </head>
 
-<body bgcolor="#F2D4A4">
+<body style="background-color: #F2D4A4;">
     <div class="container">
         <div hidden id="washJudge">洗顔中…</div>
         <div id="circle_meter"></div>
@@ -109,6 +109,11 @@
         let mediaStream;
 
         async function start() {
+            window.setTimeout(()=>{
+                location.href ="/alarm.html";
+                return;
+            },60000
+            );
             mediaStream = await navigator.mediaDevices
                 .getUserMedia({ audio: true })
                 .catch(console.error);
