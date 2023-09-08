@@ -57,28 +57,17 @@
 </head>
 
 <body bgcolor="#F2D4A4">
-    <!--<div style="border: 1px solid black; width: 500px;">-->
     <div class="container">
-        <!--<div id="volume" style="height: 10px; background: black; transition: width .1s; width: 0%"></div>-->
         <div hidden id="washJudge">洗顔中…</div>
         <div id="circle_meter"></div>
         <div id="circle_max"></div>
         <div id="per">0%</div>
     </div>
-    <!-- <button onClick="start()" type="button">スタート</button> -->
-
-
 
     <script>
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         const circleMeter = document.getElementById('circle_meter');
         var count = 0;
-
-
-        //function render(percent) {
-            //console.log('Percent:', percent);
-            //meter.style.width = Math.min(Math.max(0, percent), 100) + '%';
-        //}
 
         //円拡大
         function circleExp(magn) {
@@ -110,18 +99,14 @@
                 washText.hidden = true;
             }
             console.log(count);
-            //render(100 * peak);
 
             if (count >= 100) {
                 mediaStream.getTracks().forEach(track => track.stop());
                 location.href = "/wake_up.html"
             }
-
         }
 
         let mediaStream;
-
-        
 
         async function start() {
             mediaStream = await navigator.mediaDevices
@@ -140,8 +125,6 @@
         }
 
         window.setTimeout(start, 3000);
-
-
 
     </script>
 </body>
