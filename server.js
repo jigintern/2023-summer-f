@@ -13,7 +13,7 @@ serve(async (req) => {
     const json = await req.json();
     const time = json.time;
     const did = json.did;
-    
+
     //過去の日付か確認
     try {
       const nowTime = new Date();
