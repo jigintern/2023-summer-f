@@ -16,7 +16,17 @@ serve(async (req) => {
     const json = await req.json();
     const time = json.time;
     const did = json.did;
-
+    
+    //過去の日付か確認
+    try {
+      const nowTime = new Date();
+      const getTime = new Date(time);
+      if (nowTime >= getTime) {
+        return new Response("過去の日付です", { status: 400 });
+      }
+    } catch (e) {
+      return new Response(e.message, { status: 400 });
+    }
 
     //一度設定したことがあるかの確認
     try {
