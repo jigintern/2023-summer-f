@@ -87,6 +87,18 @@
 <script>
 
   document.getElementById("sleep_button").onclick = async () => {
+    // https://developer.mozilla.org/ja/docs/Web/API/Screen_Wake_Lock_API
+    try {
+      let wakeLock = await navigator.wakeLock.request("screen");
+      document.addEventListener("visibilitychange", async () => {
+        if (document.visibilityState === "visible") {
+          wakeLock = await navigator.wakeLock.request("screen");
+        }
+      });
+    } catch (e) {
+      alert("起動ロックができませんでした。アラームが鳴る前にスリープしてしまうかもしれません。" + e.name + " " + e.message);
+    }
+
     const sleep_button = document.getElementById("sleep_button")
     sleep_button.hidden = true;
     const id = localStorage.getItem("user_id");
