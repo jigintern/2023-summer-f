@@ -55,6 +55,10 @@
 
 
   <script type="module">
+    import { DateTime } from "https://js.sabae.cc/DateTime.js";
+    
+    sleeptime.value = new DateTime().toStringLocal().substring(0, 16);
+
     document.getElementById("time_set_button").onclick = async () => {
       const settime = document.getElementById("sleeptime").value;
       const modifiedTime = settime + ":00";
